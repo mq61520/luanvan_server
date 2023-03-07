@@ -39,7 +39,7 @@ User.get_account_by_role = (role, result) => {
 
 User.check_account = (loginname, loginpwd, kq) => {
   dbConn.query(
-    `select count(*) as exist, nd_role, nd_hoten from nguoi_dung where nd_loginname = '${loginname}' and nd_loginpwd = '${md5(
+    `select count(*) as exist, nd_id, nd_role, nd_hoten, nd_avatar from nguoi_dung where nd_loginname = '${loginname}' and nd_loginpwd = '${md5(
       loginpwd
     )}'`,
     (err, result) => {

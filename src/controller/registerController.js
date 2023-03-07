@@ -1,7 +1,7 @@
 const Account = require("../model/registerModel");
 
 exports.register = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   Account.add_customer_account(
     req.body.username,
