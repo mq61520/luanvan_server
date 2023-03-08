@@ -1,13 +1,18 @@
 const AvatarModel = require("../model/uploadAvatarModel");
 
 exports.upload_avatar = (req, res) => {
-  console.log(req.body.id, req.files[0].path);
+  console.log(req.files[0]);
 
-  AvatarModel.upload_avatar_by_id(
-    req.body.id,
-    req.files[0].filename,
-    (status) => {
-      res.send(status);
-    }
-  );
+  if (!req.files[0]) {
+    res.send("No image");
+    return;
+  } else {
+    AvatarModel.upload_avatar_by_id(
+      req.body.id,
+      req.files[0].filename,
+      (status) => {
+        res.send(status);
+      }
+    );
+  }
 };
