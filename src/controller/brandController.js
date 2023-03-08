@@ -7,7 +7,7 @@ exports.get_all_brand = (req, res) => {
 };
 
 exports.get_all_brand_by_id = (req, res) => {
-  console.log(req.params.id);
+  //   console.log(req.params.id);
 
   Brand.get_brand_by_id(req.params.id, (result) => {
     res.send(result);
