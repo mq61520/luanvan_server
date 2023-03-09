@@ -1,7 +1,7 @@
 const AvatarModel = require("../model/uploadAvatarModel");
 
 exports.upload_avatar = (req, res) => {
-  console.log(req.files[0]);
+  // console.log(req.files[0]);
 
   if (!req.files[0]) {
     res.send("No image");
