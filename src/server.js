@@ -9,6 +9,7 @@ const port = 4000;
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, "images")));
+app.use(express.static(path.join(__dirname, "productImages")));
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());

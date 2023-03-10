@@ -1,9 +1,15 @@
 const Product = require("../model/productModel");
 
-exports.add_product = (req, res) => {
-  //   console.log(req.body);
+exports.get_all = (req, res) => {
+  Product.get_all_products((result) => {
+    res.send(result);
+  });
+};
 
-  var nameImage = Date.now() + req.body.anh_sp;
+exports.add_product = (req, res) => {
+  // console.log(req.body);
+
+  var nameImage = req.body.anh_sp;
 
   Product.insert_product(
     req.body.ma_sp,
@@ -19,9 +25,15 @@ exports.add_product = (req, res) => {
 };
 
 exports.add_images = (req, res) => {
-  //   console.log(req.files[0]);
+  // console.log(req.files[0]);
 
-  Product.insert_image(req.files[0].filename, req.body.ma_sp, (result) => {
+  Product.insert_image(req.files[0].originalname, req.body.ma_sp, (result) => {
+    res.send(result);
+  });
+};
+
+exports.del_product = (req, res) => {
+  Product.delete_product(req.body.ma_sp, (result) => {
     res.send(result);
   });
 };
