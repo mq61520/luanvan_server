@@ -6,6 +6,20 @@ exports.get_all = (req, res) => {
   });
 };
 
+exports.get_product_id = (req, res) => {
+  // console.log(req.params.id);
+
+  Product.get_product_by_id(req.params.id, (result) => {
+    res.json(result);
+  });
+};
+
+exports.get_images_id = (req, res) => {
+  Product.get_images_by_id(req.params.id, (result) => {
+    res.send(result);
+  });
+};
+
 exports.add_product = (req, res) => {
   // console.log(req.body);
 

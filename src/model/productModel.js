@@ -6,8 +6,38 @@ const Product = (product) => {
 
 Product.get_all_products = (result) => {
   dbConn.query("select * from san_pham", (err, queryRes) => {
-    result(queryRes);
+    if (err) {
+      console.log(err);
+    } else {
+      result(queryRes);
+    }
   });
+};
+
+Product.get_product_by_id = (ma_sp, result) => {
+  dbConn.query(
+    `select * from san_pham where sp_ma = '${ma_sp}'`,
+    (err, queryRes) => {
+      if (err) {
+        console.log(err);
+      } else {
+        result(queryRes);
+      }
+    }
+  );
+};
+
+Product.get_images_by_id = (ma_sp, result) => {
+  dbConn.query(
+    `select * from hinh_anh where sp_id = '${ma_sp}'`,
+    (err, imgRes) => {
+      if (err) {
+        console.log(err);
+      } else {
+        result(imgRes);
+      }
+    }
+  );
 };
 
 Product.insert_product = (ma, anh_sp, ten, sl, gia, mota, status) => {

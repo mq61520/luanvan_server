@@ -14,7 +14,7 @@ Brand.get_brand = (result) => {
 
 Brand.get_brand_by_id = (id, result) => {
   dbConn.query(
-    "select * from thuong_hieu where th_id =?",
+    "select * from thuong_hieu where th_id = ?",
     id,
     (err, brands) => {
       if (err) {
