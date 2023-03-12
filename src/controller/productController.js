@@ -39,7 +39,7 @@ exports.add_product = (req, res) => {
 };
 
 exports.add_images = (req, res) => {
-  // console.log(req.files[0]);
+  console.log(req.files[0].originalname);
 
   Product.insert_image(req.files[0].originalname, req.body.ma_sp, (result) => {
     res.send(result);

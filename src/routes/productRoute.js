@@ -10,7 +10,7 @@ router.get("/product_images/:id", productController.get_images_id);
 router.post("/product", productController.add_product);
 router.post(
   "/product_images",
-  uploadProductImage.array("product_images", 6),
+  uploadProductImage.array("product_images", 12),
   productController.add_images
 );
 router.post("/product_del", productController.del_product);
