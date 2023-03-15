@@ -14,5 +14,6 @@ router.post(
   productController.add_images
 );
 router.post("/product_del", productController.del_product);
+router.post("/product_update_amount", productController.update_product_amount);
 
 module.exports = router;

@@ -51,3 +51,9 @@ exports.del_product = (req, res) => {
     res.send(result);
   });
 };
+
+exports.update_product_amount = (req, res) => {
+  Product.update_amount(req.body.ma_sp, req.body.sl, (result) => {
+    res.send(result);
+  });
+};

@@ -91,4 +91,17 @@ Product.delete_product = (ma_sp, status) => {
   });
 };
 
+Product.update_amount = (ma_sp, sl, status) => {
+  dbConn.query(
+    `update san_pham set sp_tonkho = '${sl}' where sp_ma = '${ma_sp}'`,
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        status("UpdateAmountSuccess");
+      }
+    }
+  );
+};
+
 module.exports = Product;
