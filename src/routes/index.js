@@ -5,6 +5,8 @@ const uploadAvatar = require("./uploadAvatarRoute");
 const brandRouter = require("./brandRoute");
 const productRouter = require("./productRoute");
 const cartRouter = require("./cartRoute");
+const promotionRouter = require("./promotionRoute");
+const profileRouter = require("./profileRoute");
 
 function route(app) {
   app.use("/", homeRouter);
@@ -14,6 +16,8 @@ function route(app) {
   app.use("/", brandRouter);
   app.use("/", productRouter);
   app.use("/", cartRouter);
+  app.use("/", promotionRouter);
+  app.use("/", profileRouter);
 }
 
 module.exports = route;

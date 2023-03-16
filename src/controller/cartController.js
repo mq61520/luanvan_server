@@ -13,9 +13,12 @@ exports.get_products_cart = (req, res) => {
 };
 
 exports.get_items_cart = (req, res) => {
-  Cart.get_items_in_cart(req.params.user_id, (result) => {
-    res.send(result);
-  });
+  // Cart.get_items_in_cart(req.params.user_id, (result) => {
+  //   res.send(result);
+  // });
+
+  const list_items = Cart.get_items_in_cart(req.params.user_id);
+  res.send(list_items);
 };
 
 exports.add_to_cart = (req, res) => {

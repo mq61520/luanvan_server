@@ -2,6 +2,7 @@ const dbConn = require("../connection/index");
 
 const Cart = (cart) => {
   this.id = cart.id;
+  this.items = [];
 };
 
 Cart.get_product_in_cart = (user_id, result) => {
@@ -17,9 +18,8 @@ Cart.get_product_in_cart = (user_id, result) => {
   );
 };
 
-Cart.get_items_in_cart = (user_id, result) => {
+Cart.get_items_in_cart = (user_id) => {
   const cart_items = [];
-
   dbConn.query(
     `select * from gio_hang where nd_id = '${user_id}'`,
     async (err, q_result) => {
@@ -58,10 +58,11 @@ Cart.get_items_in_cart = (user_id, result) => {
         //     }
         //   );
         // });
-        result(cart_items);
+        // result(cart_items);
       }
     }
   );
+  console.log(cart_items);
 };
 
 Cart.get_amount_cart = (user_id, result) => {
