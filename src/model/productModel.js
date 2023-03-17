@@ -40,16 +40,32 @@ Product.get_images_by_id = (ma_sp, result) => {
   );
 };
 
-Product.insert_product = (ma, anh_sp, ten, sl, gia, mota, status) => {
-  var trangthai;
-  if (sl > 0) {
-    trangthai = 1;
-  } else {
-    trangthai = 0;
-  }
-
+Product.check_code_product = (ma_sp, result) => {
   dbConn.query(
-    `insert into san_pham (sp_id, sp_ma, sp_image, sp_ten, sp_tonkho, sp_gia, sp_mota, sp_trangthai) values (null, "${ma}", "${anh_sp}", "${ten}", "${sl}", "${gia}", "${mota}", "${trangthai}")`,
+    `select count(*) as exist from san_pham where sp_ma = '${ma_sp}'`,
+    (err, q_result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        result(q_result);
+      }
+    }
+  );
+};
+
+Product.insert_product = (
+  ma,
+  anh_sp,
+  ten,
+  sl,
+  gia,
+  mota,
+  danhmuc,
+  thuonghieu,
+  status
+) => {
+  dbConn.query(
+    `insert into san_pham (sp_id, sp_ma, sp_image, sp_ten, sp_tonkho, sp_gia, sp_mota, sp_danhmuc, sp_thuonghieu) values (null, "${ma}", "${anh_sp}", "${ten}", "${sl}", "${gia}", "${mota}", "${danhmuc}", "${thuonghieu}")`,
     (err) => {
       if (err) {
         console.log(err);
@@ -99,6 +115,19 @@ Product.update_amount = (ma_sp, sl, status) => {
         console.log(err);
       } else {
         status("UpdateAmountSuccess");
+      }
+    }
+  );
+};
+
+Product.update_promotion = (ma_sp, km_id, status) => {
+  dbConn.query(
+    `update san_pham set sp_khuyenmai = '${km_id}' where sp_ma = '${ma_sp}'`,
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        status("UpdatePromotionSuccess");
       }
     }
   );

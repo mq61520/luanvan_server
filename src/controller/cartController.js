@@ -1,4 +1,5 @@
 const Cart = require("../model/cartModel");
+const Product = require("../model/productModel");
 
 exports.get_amount_cart = (req, res) => {
   Cart.get_amount_cart(req.params.user_id, (result) => {
@@ -13,12 +14,16 @@ exports.get_products_cart = (req, res) => {
 };
 
 exports.get_items_cart = (req, res) => {
-  // Cart.get_items_in_cart(req.params.user_id, (result) => {
-  //   res.send(result);
-  // });
+  var list_items = [];
 
-  const list_items = Cart.get_items_in_cart(req.params.user_id);
-  res.send(list_items);
+  Cart.get_items_in_cart(req.params.user_id, async (result) => {
+    result.map((cart_item) => {
+      Product.get_product_by_id(cart_item.sp_ma, async (item) => {
+        list_items.push(JSON.parse(JSON.stringify(item)));
+      });
+    });
+    res.send(list_items);
+  });
 };
 
 exports.add_to_cart = (req, res) => {

@@ -6,6 +6,12 @@ exports.get_promotions = (req, res) => {
   });
 };
 
+exports.get_by_id = (req, res) => {
+  Promotion.get_promotion_by_id(req.params.id, (result) => {
+    res.send(result);
+  });
+};
+
 exports.add_promotion = (req, res) => {
   console.log(req.body.value, req.body.date_start, req.body.date_end);
 
