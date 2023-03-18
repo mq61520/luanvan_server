@@ -26,6 +26,14 @@ exports.get_images_id = (req, res) => {
   });
 };
 
+exports.get_product_category = (req, res) => {
+  // console.log(req.params.type);
+
+  Product.get_product_by_category(req.params.type, (result) => {
+    res.json(result);
+  });
+};
+
 exports.add_product = (req, res) => {
   // console.log(req.body);
 

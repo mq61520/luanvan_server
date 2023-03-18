@@ -8,6 +8,7 @@ router.get("/products", productController.get_all);
 router.get("/product_id/:id", productController.get_product_id);
 router.get("/product_images/:id", productController.get_images_id);
 router.get("/product_check/:ma_sp", productController.check_code);
+router.get("/product/category/:type", productController.get_product_category);
 router.post("/product", productController.add_product);
 router.post(
   "/product_images",

@@ -40,6 +40,19 @@ Product.get_images_by_id = (ma_sp, result) => {
   );
 };
 
+Product.get_product_by_category = (type, result) => {
+  dbConn.query(
+    `select * from san_pham where sp_danhmuc = '${type}'`,
+    (err, queryRes) => {
+      if (err) {
+        console.log(err);
+      } else {
+        result(queryRes);
+      }
+    }
+  );
+};
+
 Product.check_code_product = (ma_sp, result) => {
   dbConn.query(
     `select count(*) as exist from san_pham where sp_ma = '${ma_sp}'`,
