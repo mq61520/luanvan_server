@@ -53,6 +53,19 @@ Product.get_product_by_category = (type, result) => {
   );
 };
 
+Product.get_product_by_brand = (brand, result) => {
+  dbConn.query(
+    `select * from san_pham where sp_thuonghieu = '${brand}'`,
+    (err, queryRes) => {
+      if (err) {
+        console.log(err);
+      } else {
+        result(queryRes);
+      }
+    }
+  );
+};
+
 Product.check_code_product = (ma_sp, result) => {
   dbConn.query(
     `select count(*) as exist from san_pham where sp_ma = '${ma_sp}'`,

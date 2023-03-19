@@ -34,6 +34,14 @@ exports.get_product_category = (req, res) => {
   });
 };
 
+exports.get_product_brand = (req, res) => {
+  // console.log(req.params.type);
+
+  Product.get_product_by_brand(req.params.brand, (result) => {
+    res.json(result);
+  });
+};
+
 exports.add_product = (req, res) => {
   // console.log(req.body);
 
