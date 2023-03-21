@@ -74,6 +74,23 @@ Cart.add_cart = (user_id, ma_sp, sl_sp, status) => {
   );
 };
 
+Cart.update_amount = (user_id, ma_sp, type, status) => {
+  var sql = "";
+  if (type == "increase") {
+    sql = `update gio_hang set gh_soluong = gh_soluong + 1 where nd_id = '${user_id}' and sp_ma = '${ma_sp}'`;
+  } else if (type == "minus") {
+    sql = `update gio_hang set gh_soluong = gh_soluong - 1 where nd_id = '${user_id}' and sp_ma = '${ma_sp}'`;
+  }
+
+  dbConn.query(sql, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      status("UpdateSuccess");
+    }
+  });
+};
+
 Cart.delete = (user_id, ma_sp, status) => {
   dbConn.query(
     `delete from gio_hang where nd_id = '${user_id}' and sp_ma = '${ma_sp}'`,

@@ -34,6 +34,19 @@ exports.add_to_cart = (req, res) => {
   });
 };
 
+exports.update_amount = (req, res) => {
+  console.log(req.body.user_id, req.body.ma_sp, req.body.type);
+
+  Cart.update_amount(
+    req.body.user_id,
+    req.body.ma_sp,
+    req.body.type,
+    (result) => {
+      res.send(result);
+    }
+  );
+};
+
 exports.cart_delete = (req, res) => {
   console.log(req.body.user_id, req.body.ma_sp);
 

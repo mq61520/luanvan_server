@@ -11,3 +11,16 @@ exports.phone = (req, res) => {
     res.send(result);
   });
 };
+
+exports.change_phone_and_address = (req, res) => {
+  console.log(req.body.phone, req.body.address, req.body.user_id);
+
+  Profile.update_phone_and_address(
+    req.body.phone,
+    req.body.address,
+    req.body.user_id,
+    (result) => {
+      res.send(result);
+    }
+  );
+};
