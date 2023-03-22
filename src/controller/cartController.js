@@ -48,9 +48,9 @@ exports.update_amount = (req, res) => {
 };
 
 exports.cart_delete = (req, res) => {
-  console.log(req.body.user_id, req.body.ma_sp);
+  console.log(req.body.user_id, req.body.ma_sp, req.body.sl);
 
-  Cart.delete(req.body.user_id, req.body.ma_sp, (result) => {
+  Cart.delete(req.body.user_id, req.body.ma_sp, req.body.sl, (result) => {
     res.send(result);
   });
 };

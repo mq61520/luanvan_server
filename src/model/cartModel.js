@@ -77,9 +77,11 @@ Cart.add_cart = (user_id, ma_sp, sl_sp, status) => {
 Cart.update_amount = (user_id, ma_sp, type, status) => {
   var sql = "";
   if (type == "increase") {
-    sql = `update gio_hang set gh_soluong = gh_soluong + 1 where nd_id = '${user_id}' and sp_ma = '${ma_sp}'`;
+    sql = `update gio_hang set gh_soluong = gh_soluong + 1 where nd_id = '${user_id}' and sp_ma = '${ma_sp}'; 
+    update san_pham set sp_tonkho = sp_tonkho - 1 where sp_ma = '${ma_sp}'`;
   } else if (type == "minus") {
-    sql = `update gio_hang set gh_soluong = gh_soluong - 1 where nd_id = '${user_id}' and sp_ma = '${ma_sp}'`;
+    sql = `update gio_hang set gh_soluong = gh_soluong - 1 where nd_id = '${user_id}' and sp_ma = '${ma_sp}'; 
+    update san_pham set sp_tonkho = sp_tonkho + 1 where sp_ma = '${ma_sp}'`;
   }
 
   dbConn.query(sql, (err) => {
@@ -91,9 +93,10 @@ Cart.update_amount = (user_id, ma_sp, type, status) => {
   });
 };
 
-Cart.delete = (user_id, ma_sp, status) => {
+Cart.delete = (user_id, ma_sp, sl_sp, status) => {
   dbConn.query(
-    `delete from gio_hang where nd_id = '${user_id}' and sp_ma = '${ma_sp}'`,
+    `update san_pham set sp_tonkho = sp_tonkho + ${sl_sp} where sp_ma = '${ma_sp}';
+    delete from gio_hang where nd_id = '${user_id}' and sp_ma = '${ma_sp}'; `,
     (err) => {
       if (err) {
         console.log(err);
