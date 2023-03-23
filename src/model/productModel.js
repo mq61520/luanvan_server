@@ -91,7 +91,7 @@ Product.insert_product = (
   status
 ) => {
   dbConn.query(
-    `insert into san_pham (sp_id, sp_ma, sp_image, sp_ten, sp_tonkho, sp_gia, sp_mota, sp_danhmuc, sp_thuonghieu) values (null, "${ma}", "${anh_sp}", "${ten}", "${sl}", "${gia}", "${mota}", "${danhmuc}", "${thuonghieu}")`,
+    `insert into san_pham (sp_id, sp_ma, sp_image, sp_ten, sp_tonkho, sp_gia, sp_mota, sp_danhmuc, sp_thuonghieu, sp_rate) values (null, "${ma}", "${anh_sp}", "${ten}", "${sl}", "${gia}", "${mota}", "${danhmuc}", "${thuonghieu}", 0)`,
     (err) => {
       if (err) {
         console.log(err);

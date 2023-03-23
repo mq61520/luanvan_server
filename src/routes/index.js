@@ -8,6 +8,7 @@ const cartRouter = require("./cartRoute");
 const promotionRouter = require("./promotionRoute");
 const profileRouter = require("./profileRoute");
 const orderRouter = require("./orderRoute");
+const commentRouter = require("./commentRoute");
 
 function route(app) {
   app.use("/", homeRouter);
@@ -20,6 +21,7 @@ function route(app) {
   app.use("/", promotionRouter);
   app.use("/", profileRouter);
   app.use("/", orderRouter);
+  app.use("/", commentRouter);
 }
 
 module.exports = route;
