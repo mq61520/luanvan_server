@@ -4,7 +4,7 @@ const Order = (order) => {
   this.id = order.id;
 };
 
-Order.select_all = (user_id, result) => {
+Order.select_by_id = (user_id, result) => {
   dbConn.query(
     `select * from don_hang where nd_id = '${user_id}'`,
     (err, q_result) => {
@@ -23,6 +23,25 @@ Order.select_by_status = (user_id, trang_thai, result) => {
     sql += `select * from don_hang where nd_id = '${user_id}'`;
   } else {
     sql += `select * from don_hang where nd_id = '${user_id}' and dh_trangthai = '${trang_thai}'`;
+  }
+
+  dbConn.query(sql, (err, q_result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      result(q_result);
+    }
+  });
+};
+
+Order.select_by_status_admin = (trang_thai, result) => {
+  var sql = "";
+  if (trang_thai == "all") {
+    sql = `select dh_id, dh_ma, nd_id, DATE_FORMAT( CONVERT_TZ(dh_ngaylap, '+00:00', '+07:00'), '%d/%m/%Y') as ngaylap, 
+  dh_diachi, dh_sdt, dh_slsp, dh_tongtien, dh_httt, dh_htgh, dh_ghichu, dh_trangthai from don_hang`;
+  } else {
+    sql = `select dh_id, dh_ma, nd_id, DATE_FORMAT( CONVERT_TZ(dh_ngaylap, '+00:00', '+07:00'), '%d/%m/%Y') as ngaylap, 
+  dh_diachi, dh_sdt, dh_slsp, dh_tongtien, dh_httt, dh_htgh, dh_ghichu, dh_trangthai from don_hang where dh_trangthai = '${trang_thai}'`;
   }
 
   dbConn.query(sql, (err, q_result) => {
@@ -86,6 +105,32 @@ Order.create_order = (
       status("InsertSuccess");
     }
   });
+};
+
+Order.confirm = (ma_dh, status) => {
+  dbConn.query(
+    `update don_hang set dh_trangthai = 'Preparing' where dh_ma ='${ma_dh}'`,
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        status("Confirmed");
+      }
+    }
+  );
+};
+
+Order.update_order_status = (ma_dh, trang_thai, status) => {
+  dbConn.query(
+    `update don_hang set dh_trangthai = '${trang_thai}' where dh_ma ='${ma_dh}'`,
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        status("UpdateStatusSuccess");
+      }
+    }
+  );
 };
 
 Order.select_detail_order = (order_id, result) => {

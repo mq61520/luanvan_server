@@ -9,7 +9,9 @@ User.get_all_accounts = (result) => {
   dbConn.query("select * from nguoi_dung", (err, user) => {
     if (err) {
       console.log(err);
-    } else result(user);
+    } else {
+      result(user);
+    }
   });
 };
 

@@ -146,6 +146,22 @@ Product.update_amount = (ma_sp, sl, status) => {
   );
 };
 
+Product.update_amount_v2 = (ma_sp, type, sl, status) => {
+  var sql;
+  if (type === "tang") {
+    sql = `update san_pham set sp_tonkho = sp_tonkho + '${sl}' where sp_ma = '${ma_sp}'`;
+  } else if (type === "giam") {
+    sql = `update san_pham set sp_tonkho = sp_tonkho - '${sl}' where sp_ma = '${ma_sp}'`;
+  }
+  dbConn.query(sql, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      status("UpdateAmountSuccess");
+    }
+  });
+};
+
 Product.update_promotion = (ma_sp, km_id, status) => {
   dbConn.query(
     `update san_pham set sp_khuyenmai = '${km_id}' where sp_ma = '${ma_sp}'`,

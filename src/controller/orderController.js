@@ -1,13 +1,19 @@
 const Order = require("../model/orderModel");
 
-exports.get_all_order = (req, res) => {
-  Order.select_all(req.body.user_id, (result) => {
+exports.get_order_by_id = (req, res) => {
+  Order.select_by_id(req.body.user_id, (result) => {
     res.send(result);
   });
 };
 
 exports.get_order_by_status = (req, res) => {
   Order.select_by_status(req.body.user_id, req.body.trangthai, (result) => {
+    res.send(result);
+  });
+};
+
+exports.get_order_by_status_admin = (req, res) => {
+  Order.select_by_status_admin(req.params.status, (result) => {
     res.send(result);
   });
 };
@@ -41,6 +47,18 @@ exports.add_order = (req, res) => {
       res.send(result);
     }
   );
+};
+
+exports.confirm_order = (req, res) => {
+  Order.confirm(req.params.ma_dh, (status) => {
+    res.send(status);
+  });
+};
+
+exports.change_order_status = (req, res) => {
+  Order.update_order_status(req.body.ma_dh, req.body.trang_thai, (status) => {
+    res.send(status);
+  });
 };
 
 exports.get_detial_order = (req, res) => {

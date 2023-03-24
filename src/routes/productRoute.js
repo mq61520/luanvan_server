@@ -19,6 +19,10 @@ router.post(
 router.post("/product_del", productController.del_product);
 router.post("/product_update_amount", productController.update_product_amount);
 router.post(
+  "/product_update_amount_v2",
+  productController.update_product_amount_v2
+);
+router.post(
   "/product/update_promotion",
   productController.update_product_promotion
 );

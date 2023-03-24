@@ -82,6 +82,19 @@ exports.update_product_amount = (req, res) => {
   });
 };
 
+exports.update_product_amount_v2 = (req, res) => {
+  console.log(req.body.ma_sp, req.body.type, req.body.sl);
+
+  Product.update_amount_v2(
+    req.body.ma_sp,
+    req.body.type,
+    req.body.sl,
+    (result) => {
+      res.send(result);
+    }
+  );
+};
+
 exports.update_product_promotion = (req, res) => {
   console.log(req.body.ma_sp, req.body.km_id);
 
