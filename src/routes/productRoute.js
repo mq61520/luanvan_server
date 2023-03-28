@@ -26,5 +26,9 @@ router.post(
   "/product/update_promotion",
   productController.update_product_promotion
 );
+router.post(
+  "/product/filter-product",
+  productController.get_product_with_filter
+);
 
 module.exports = router;

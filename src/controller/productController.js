@@ -102,3 +102,31 @@ exports.update_product_promotion = (req, res) => {
     res.send(result);
   });
 };
+
+exports.get_product_with_filter = (req, res) => {
+  console.log(req.body.brands, req.body.categorise, req.body.price);
+
+  var brand = "";
+  for (let i = 0; i < req.body.brands.length; i++) {
+    if (i + 1 === req.body.brands.length) {
+      brand += ` sp_thuonghieu = '${req.body.brands[i]}'`;
+    } else {
+      brand += ` sp_thuonghieu = '${req.body.brands[i]}' or`;
+    }
+  }
+
+  var category = "";
+  for (let i = 0; i < req.body.categorise.length; i++) {
+    if (i + 1 === req.body.categorise.length) {
+      category += ` sp_danhmuc = '${req.body.categorise[i]}'`;
+    } else {
+      category += ` sp_danhmuc = '${req.body.categorise[i]}' or`;
+    }
+  }
+
+  // console.log(brand, category);
+
+  Product.get_product_by_filter(brand, category, req.body.price, (result) => {
+    res.json(result);
+  });
+};

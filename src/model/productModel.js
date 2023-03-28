@@ -175,4 +175,42 @@ Product.update_promotion = (ma_sp, km_id, status) => {
   );
 };
 
+Product.get_product_by_filter = (brands, categorise, price, result) => {
+  console.log(brands, categorise, price);
+
+  var sql = "select * from san_pham where ";
+
+  if (brands !== "") {
+    sql += ` ${brands} `;
+  }
+
+  if (categorise !== "" && brands === "") {
+    sql += ` ${categorise} `;
+  } else {
+    if (categorise !== "") {
+      sql += ` and ${categorise} `;
+    }
+  }
+
+  if (price !== 0 && categorise === "" && brands === "") {
+    sql += ` sp_gia < ${price}`;
+  } else if (price !== 0) {
+    sql += ` and sp_gia < ${price}`;
+  }
+
+  if (price === 0 && categorise === "" && brands === "") {
+    sql = `select * from san_pham`;
+  }
+
+  console.log(sql);
+
+  dbConn.query(sql, (err, queryRes) => {
+    if (err) {
+      console.log(err);
+    } else {
+      result(queryRes);
+    }
+  });
+};
+
 module.exports = Product;
