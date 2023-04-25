@@ -178,7 +178,7 @@ Product.update_promotion = (ma_sp, km_id, status) => {
 Product.get_product_by_filter = (brands, categorise, price, result) => {
   console.log(brands, categorise, price);
 
-  var sql = "select * from san_pham where ";
+  var sql = "select * from san_pham where";
 
   if (brands !== "") {
     sql += ` ${brands} `;
