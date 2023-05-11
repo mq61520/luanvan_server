@@ -101,10 +101,14 @@ exports.get_items_for_item = (req, res) => {
     );
 
     client.send(
-      new rqs.RecommendItemsToItem(req.body.itemId, req.body.userId, 3),
+      new rqs.RecommendItemsToItem(req.body.itemId, req.body.userId, 4),
       (err, recommendations) => {
         // console.log(recommendations.recomms);
-        res.send(recommendations.recomms);
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(recommendations.recomms);
+        }
       }
     );
   } catch (error) {
@@ -123,10 +127,14 @@ exports.get_items_for_user = (req, res) => {
     );
 
     client.send(
-      new rqs.RecommendItemsToUser(req.body.userId, 3),
+      new rqs.RecommendItemsToUser(req.body.userId, 4),
       (err, recommendations) => {
-        console.log(recommendations.recomms);
-        res.send(recommendations.recomms);
+        // console.log(recommendations.recomms);
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(recommendations.recomms);
+        }
       }
     );
   } catch (error) {
